@@ -3,6 +3,7 @@
 //  NewsApp
 //
 //  Created by Anusha S on 04/10/23.
+//init commit
 //
 
 import SwiftUI
