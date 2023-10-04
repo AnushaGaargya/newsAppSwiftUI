@@ -11,8 +11,10 @@ import Firebase
 struct ContentView: View {
     @State private var email = ""
     @State private var password = ""
-    @State private var userIsLoggedIn = false
+//    @ObservedObject var authManager = AuthManager()
+    @State private var userIsLoggedIn: Bool = false
     var body: some View {
+        
         if userIsLoggedIn {
            ListView()
         } else {
@@ -116,6 +118,7 @@ struct ContentView: View {
                 print(error!.localizedDescription)
             }
         }
+        userIsLoggedIn = true
     }
 }
 
@@ -137,3 +140,15 @@ extension View {
         }
     }
 }
+
+//class AuthManager : ObservableObject {
+//    @Published var userIsLoggedIn = false
+//
+//    private var authStateHandle: AuthStateDidChangeListenerHandle?
+//
+//    init() {
+//        authStateHandle = Auth.auth().addStateDidChangeListener { _, user in
+//            self.userIsLoggedIn = user != nil
+//        }
+//    }
+//}
