@@ -12,94 +12,96 @@ import SDWebImageSwiftUI
 import WebKit
 
 struct ListView: View {
+    @EnvironmentObject var viewModel : AppViewModel
     @ObservedObject var list = getData()
-    
+
     init() {
-         // Customize the appearance of the UIToolbar
-         let appearance = UINavigationBarAppearance()
-         appearance.configureWithTransparentBackground()
-         appearance.backgroundColor = .black
-        
+        // Customize the appearance of the UIToolbar
+
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.backgroundColor = .black
+
         let titleAttributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.white,
             .font: UIFont(name: "RobotoSlab-Bold", size: 29) ?? UIFont.boldSystemFont(ofSize: 29)
 
         ]
-         appearance.titleTextAttributes = titleAttributes
+        appearance.titleTextAttributes = titleAttributes
         appearance.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 0)
 
-         UINavigationBar.appearance().standardAppearance = appearance
-         UINavigationBar.appearance().scrollEdgeAppearance = appearance
-     }
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+    }
     
     var body: some View {
         ZStack{
-            Color.gray.ignoresSafeArea()
-        NavigationView{
-            List($list.datas){ i in
-                NavigationLink(destination:
-                                webView(url: i.url.wrappedValue).navigationBarTitle("", displayMode: .inline)){
-
-                    if i.image.wrappedValue != ""{
-                        ZStack{
-                            Color.clear
-                                .offset(y: 80)
-                            WebImage(url: URL(string: i.image.wrappedValue), options: .highPriority, context: nil)
-                                .resizable()
-                                .cornerRadius(5)
-                                .aspectRatio(contentMode: .fit)
-                                .opacity(0.5)
-                            VStack(alignment: .leading, spacing: 24){
-
-                                Text(i.title.wrappedValue)
-            
-                                    .font(.custom("RobotoSlab-Regular", size: 20))
-                                    .fontWeight(.heavy)
-                                    .foregroundColor(Color(UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1.00)))
-                                    .lineLimit(2)
-                                    .offset(y: 50)
-                                HStack(spacing: 24){
-                                    Text("BBC")
-                                        .font(.custom("RobotoSlab-Bold", size: 12))
+            Color.black.ignoresSafeArea(.all)
+            NavigationView{
+                List($list.datas){ i in
+                    NavigationLink(destination:
+                                    webView(url: i.url.wrappedValue).navigationBarTitle("", displayMode: .inline)){
+                        if i.image.wrappedValue != ""{
+                            ZStack{
+                                Color.clear
+                                WebImage(url: URL(string: i.image.wrappedValue), options: .highPriority, context: nil)
+                                    .resizable()
+                                    .cornerRadius(5)
+                                    .aspectRatio(contentMode: .fit)
+                                    .opacity(0.8)
+                                VStack(alignment: .leading, spacing: 24){
+                                    Text(i.title.wrappedValue)
+                                    
+                                        .font(.custom("RobotoSlab-Regular", size: 20))
                                         .fontWeight(.heavy)
-                                        .foregroundColor(Color(UIColor(red: 0.73, green: 0.73, blue: 0.73, alpha: 1.00)))
-                                    Text(i.id.wrappedValue)
-                                        .font(.custom("RobotoSlab-Bold", size: 12))
-                                        .fontWeight(.heavy)
-                                        .foregroundColor(Color(UIColor(red: 0.73, green: 0.73, blue: 0.73, alpha: 1.00)))
-                                }.offset(y: 40)
-                                //                                    Text(i.desc.wrappedValue).lineLimit(2)
-
-                            }.padding()
+                                        .foregroundColor(Color(UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1.00)))
+                                        .lineLimit(2)
+                                        .offset(y: 50)
+                                    HStack(spacing: 24){
+                                        Text("BBC")
+                                            .font(.custom("RobotoSlab-Bold", size: 12))
+                                            .fontWeight(.heavy)
+                                            .foregroundColor(Color(UIColor(red: 0.73, green: 0.73, blue: 0.73, alpha: 1.00)))
+                                        Text(i.id.wrappedValue)
+                                            .font(.custom("RobotoSlab-Bold", size: 12))
+                                            .fontWeight(.heavy)
+                                            .foregroundColor(Color(UIColor(red: 0.73, green: 0.73, blue: 0.73, alpha: 1.00)))
+                                    }.offset(y: 40)
+                                }
+                            }
+                            .cornerRadius(10)
                         }
-                        .cornerRadius(10)
-                        .padding(.vertical, 5)
                     }
+                                    .frame( maxWidth: .infinity)
+                                    .edgesIgnoringSafeArea(.all)
+                                    .listRowBackground(Color(  UIColor(red: 0.27, green: 0.27, blue: 0.27, alpha: 1.00)))
+                                    .listStyle(PlainListStyle())
+                                    .scrollContentBackground(.hidden)
                 }
-              
-                    .listRowBackground(Color(  UIColor(red: 0.27, green: 0.27, blue: 0.27, alpha: 1.00)))
+                .background(Color.black.ignoresSafeArea(.all))
+                .navigationBarTitle("HEADLINES", displayMode: .inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button (action: {
+                            viewModel.signOut()
+                        }){
+                            Text("Sign Out")
+                                .font(.system(size: 14))
+                        }
+                    }
+
+                }
             }
-            .navigationBarTitle("H E A D L I N E S", displayMode: .inline)
-            .listStyle(PlainListStyle())
-        }
-//                .navigationViewStyle(StackNavigationViewStyle())
-        .onAppear {
-                    UINavigationBar.appearance().backgroundColor = UIColor.clear
-                }
-//                .background(Color.black)
-        }
-        .ignoresSafeArea()
-//        .edgesIgnoringSafeArea(.all)
-//
+        }.ignoresSafeArea()
     }
-    }
-    
+}
+//-------------------------------------------------------------------------------------
     struct ListView_Previews: PreviewProvider {
         static var previews: some View {
             ListView()
         }
     }
-    
+//--------------------------------------------------------------------------------------
     struct dataType: Identifiable {
         var id: String
         var title: String
@@ -107,7 +109,7 @@ struct ListView: View {
         var url: String
         var image: String
     }
-    
+//-------------------------------------------------------------------------------------
     class getData: ObservableObject {
         @Published var datas = [dataType]()
         init() {
@@ -139,9 +141,8 @@ struct ListView: View {
             }.resume()
         }
     }
-    
 
-    
+//--------------------------------------------------------------------------------------
     struct webView : UIViewRepresentable {
         var url : String
         func makeUIView(context: UIViewRepresentableContext<webView>) -> WKWebView{
