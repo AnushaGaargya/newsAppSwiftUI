@@ -17,6 +17,7 @@
 		883598792ACD60B9002D262E /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883598782ACD60B9002D262E /* ListView.swift */; };
 		8835987C2ACD69FD002D262E /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 8835987B2ACD69FD002D262E /* SwiftyJSON */; };
 		8835987F2ACD6A82002D262E /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8835987E2ACD6A82002D262E /* SDWebImageSwiftUI */; };
+		883598812ACFD0FE002D262E /* .github in Resources */ = {isa = PBXBuildFile; fileRef = 883598802ACFD0FE002D262E /* .github */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		8835986A2ACD4C39002D262E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		883598762ACD568C002D262E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		883598782ACD60B9002D262E /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		883598802ACFD0FE002D262E /* .github */ = {isa = PBXFileReference; lastKnownFileType = text; path = .github; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				883598672ACD4C39002D262E /* Assets.xcassets */,
 				883598762ACD568C002D262E /* GoogleService-Info.plist */,
 				883598692ACD4C39002D262E /* Preview Content */,
+				883598802ACFD0FE002D262E /* .github */,
 			);
 			path = NewsApp;
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				883598812ACFD0FE002D262E /* .github in Resources */,
 				8835986B2ACD4C39002D262E /* Preview Assets.xcassets in Resources */,
 				883598772ACD568C002D262E /* GoogleService-Info.plist in Resources */,
 				883598682ACD4C39002D262E /* Assets.xcassets in Resources */,
